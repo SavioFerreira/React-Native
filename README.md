@@ -1,1 +1,0 @@
-# Projetos react native
