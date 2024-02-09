@@ -1,10 +1,12 @@
 import React, { cloneElement } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
 
 export default function (props) {
     return (
+        
         <View style={styles.container}>
-            <Text style={styles.mainText}>{props.texto}Aqui estou mais um dia</Text>
+            <StatusBar barStyle={"light-content"} backgroundColor={'black'}/>
+            <Text style={styles.mainText}>{props.texto}</Text>
         </View>
 
     )
