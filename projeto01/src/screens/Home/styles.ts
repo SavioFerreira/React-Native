@@ -44,7 +44,7 @@ import { StyleSheet } from "react-native";
         width: 140,
         height: 140,
         marginTop: 60,
-        alignSelf: 'center',
+        alignSelf: 'center'
     },
 });
 
