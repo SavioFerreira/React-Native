@@ -14,18 +14,23 @@ export default function Home() {
                 <Text style={styles.textMain}>Coleta Coletiva</Text>
             </TouchableOpacity>
             <View style={styles.inputTextView}>
-                <TextInput
-                    style={styles.inputText}
-                    placeholder='Email:'
-                    placeholderTextColor={'#00FFFF'} inputMode='email'
-                />
-                <Icon style={styles.loginIcon} name='user-circle' />
-                <TextInput
-                    style={styles.inputText}
-                    placeholder='Senha:'
-                    placeholderTextColor={'#00FFFF'}
-                />
-                <Icon2 style={styles.loginIcon} name='password' />
+                <View style={styles.inputIconView}>
+                    <TextInput
+                        style={styles.inputText}
+                        placeholder='Email:'
+                        placeholderTextColor={'#00FFFF'} inputMode='email'
+                    />
+                    <Icon style={styles.loginIcon} name='user-circle' />
+                </View>
+                <View style={styles.inputIconView}>
+                    <TextInput
+                        style={styles.inputText}
+                        placeholder='Senha:'
+                        placeholderTextColor={'#00FFFF'}
+                    />
+                    <Icon2 style={styles.loginIcon} name='password' />
+                </View>
+
             </View>
         </View>
     )

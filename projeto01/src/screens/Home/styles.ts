@@ -23,15 +23,14 @@ import { StyleSheet } from "react-native";
     inputTextView: {
         flex: 1,
         justifyContent: 'flex-end',
-        alignItems: 'flex-end',
-        marginBottom: 150,
+        width: '100%',
+        marginBottom: 180,
     },
     inputIconView: {
-        flex: 1,
-        flexDirection: 'row',
-        alignContent: 'flex-end',
-        alignSelf: 'flex-end',
-        alignItems: 'flex-end',
+        width: '100%',
+        paddingLeft: 50,
+        alignItems: 'center',
+        flexDirection: "row",
     },
     inputText: {
         backgroundColor: '#2F4F4F',
@@ -57,7 +56,7 @@ import { StyleSheet } from "react-native";
     loginIcon: {
         color: '#00FFFF',
         fontSize: 25,
-        alignSelf: 'flex-end',
+        justifyContent: 'center',
         marginEnd: 40
     },
 });
