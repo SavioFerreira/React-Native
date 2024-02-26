@@ -19,12 +19,22 @@ import { StyleSheet } from "react-native";
         marginTop: 24,
         fontSize: 20,
     },
+    textHome: {
+        color: '#1F2F79',
+        marginTop: 20,
+        marginHorizontal: 50,
+        fontWeight: '800',
+        fontSize: 19,
+        fontStyle: 'italic',
+        alignSelf: 'center',
+        textAlign: 'center'
+    },
 
     inputTextView: {
         flex: 1,
         justifyContent: 'flex-end',
         width: '100%',
-        marginBottom: 180,
+        marginBottom: 150,
     },
     inputIconView: {
         width: '100%',

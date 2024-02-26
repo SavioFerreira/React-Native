@@ -49,6 +49,7 @@ export default function Home() {
                     />
                     <Icon2 style={styles.loginIcon} name='password' />
                 </View>
+                <Text style={styles.textHome}>Colabore com seu bairro e ajude o planeta.</Text>
 
             </View>
         </View>
