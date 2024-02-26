@@ -21,9 +21,16 @@ import { StyleSheet } from "react-native";
     },
 
     inputTextView: {
-        flex: 2,
+        flex: 1,
         justifyContent: 'flex-end',
-        marginBottom: 150,
+        width: '100%',
+        marginBottom: 180,
+    },
+    inputIconView: {
+        width: '100%',
+        paddingLeft: 50,
+        alignItems: 'center',
+        flexDirection: "row",
     },
     inputText: {
         backgroundColor: '#2F4F4F',
@@ -45,6 +52,12 @@ import { StyleSheet } from "react-native";
         height: 140,
         marginTop: 60,
         alignSelf: 'center'
+    },
+    loginIcon: {
+        color: '#00FFFF',
+        fontSize: 25,
+        justifyContent: 'center',
+        marginEnd: 40
     },
 });
 
