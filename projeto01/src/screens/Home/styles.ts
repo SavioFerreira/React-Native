@@ -5,13 +5,13 @@ import { StyleSheet } from "react-native";
         flex: 1,
         backgroundColor: '#389',
     },
-    textMain: {
+    textLogo: {
         color: '#2F4F4F',
         marginTop: 5,
         marginBottom: 20,
         alignSelf: 'center',
         fontSize: 24,
-        fontWeight: '500',
+        fontWeight: '700',
         fontStyle: 'italic',
     },
     text: {
@@ -19,7 +19,7 @@ import { StyleSheet } from "react-native";
         marginTop: 24,
         fontSize: 20,
     },
-    textHome: {
+    textlogin: {
         color: '#1F2F79',
         marginTop: 20,
         marginHorizontal: 50,
@@ -27,31 +27,38 @@ import { StyleSheet } from "react-native";
         fontSize: 19,
         fontStyle: 'italic',
         alignSelf: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
+        borderWidth: 0.5,
+        borderColor: 'blue',
     },
 
     inputTextView: {
         flex: 1,
         justifyContent: 'flex-end',
         width: '100%',
-        marginBottom: 150,
+        marginBottom: 30,
+        padding: 50,
+        borderWidth: 2,
+        borderColor: 'blue',
     },
     inputIconView: {
         width: '100%',
-        paddingLeft: 50,
+        marginRight: 30,
         alignItems: 'center',
         flexDirection: "row",
+        borderWidth: 0.5,
+        borderColor: 'blue',
     },
     inputText: {
         backgroundColor: '#2F4F4F',
-        borderWidth: 2,
+        borderWidth: 4,
         borderColor: '#008B8B',
         margin: 3,
-        padding: 4,
-        paddingLeft: 15,
-        borderRadius: 5,
+        padding: 8,
+        paddingLeft: 11,
+        borderRadius: 8,
         fontSize: 17,
-        width: '80%',
+        width: '100%',
         alignSelf: 'center',
         textAlign: 'left',
         justifyContent:'flex-end',
@@ -65,9 +72,11 @@ import { StyleSheet } from "react-native";
     },
     loginIcon: {
         color: '#00FFFF',
-        fontSize: 25,
+        fontSize: 27,
         justifyContent: 'center',
-        marginEnd: 40
+        marginEnd: 40,
+        borderColor: 'blue',
+        borderWidth: 0.5,
     },
 });
 

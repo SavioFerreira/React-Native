@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, Alert, } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
@@ -29,7 +29,7 @@ export default function Home() {
                 onLongPress={showColetaColetivaLongPress}
                 onPress={showColetaColetivaPress}>
                 <Image style={styles.logo} source={require(logo_World)} />
-                <Text style={styles.textMain}>Coleta Coletiva</Text>
+                <Text style={styles.textLogo}>Coleta Coletiva</Text>
             </TouchableOpacity>
             <View style={styles.inputTextView}>
                 <View style={styles.inputIconView}>
@@ -49,7 +49,7 @@ export default function Home() {
                     />
                     <Icon2 style={styles.loginIcon} name='password' />
                 </View>
-                <Text style={styles.textHome}>Colabore com seu bairro e ajude o planeta.</Text>
+                <Text style={styles.textlogin}>Colabore com seu bairro e ajude o planeta.</Text>
 
             </View>
         </View>
