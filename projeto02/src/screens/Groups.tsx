@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 export function Groups() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Projeto 002 - React Native</Text>
+        <Text style={styles.text}>Projeto 002 - React Native - SFC</Text>
       </View>
     );
   }
