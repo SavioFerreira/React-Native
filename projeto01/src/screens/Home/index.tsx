@@ -8,6 +8,7 @@ const logo_World = '../../../assets/logo-world.png';
 export default function Home() {
 
     function showColetaColetivaLongPress() {
+        console.log('Entrou forte, la ele 1000 vezes')
         return (
             Alert.alert('Coleta Coletiva - SFC',
                 'App Feito com react Native no mobile e Java spring no backEnd.\n' +
@@ -18,6 +19,7 @@ export default function Home() {
     }
     
     function showColetaColetivaPress() {
+        console.log('Entrou - fraco, la ele')
         return (
             Alert.alert('Coleta Coletiva',
                 'App Coleta coletiva\nProjeto final de curso\nSávio Ferreira')
