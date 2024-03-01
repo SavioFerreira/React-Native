@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { Container, Title } from './styles';
+import { Container, Title, Logo } from './styles';
 
+const logo = '../../assets/skull-flower.png';
 export function Groups() {
     return (
       <Container>
-        <Title>Projeto 002 - React Native - SFC</Title>
+        <Logo source={require(logo)} />
+        <Title>Projeto 002</Title>
+        <Title>React Native - SFC</Title>
       </Container>
     );
   }
