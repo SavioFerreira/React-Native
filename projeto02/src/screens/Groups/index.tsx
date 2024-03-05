@@ -1,10 +1,10 @@
-import { Container, Title, Logo } from './styles';
+import { Header } from '@components/Header';
+import { Container, Title } from './styles';
 
-const logo = '../../assets/skull-flower.png';
 export function Groups() {
     return (
       <Container>
-        <Logo source={require(logo)} />
+        <Header />
         <Title>Projeto 002</Title>
         <Title>React Native - SFC</Title>
       </Container>
