@@ -12,8 +12,8 @@ export function Groups() {
     <Container>
       <Header />
       <Highlight
-        title='O senhor dos Aneis'
-        subtitle='lá ele, só se for o seu'
+        title='Denuncias'
+        subtitle='selecione uma denúncia e inicie sua verificação'
       />
       <FlatList
         data={groups}
