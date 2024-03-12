@@ -5,6 +5,7 @@ import { Highlight } from '@components/Highlight';
 import { GroupCard } from '@components/GroupCard';
 import { FlatList } from 'react-native';
 import { ListEmpty } from '@components/ListEmpty';
+import { Button } from '@components/Button';
 
 export function Groups() {
   const [groups, setGroups] = useState<string[]>([]);
@@ -30,6 +31,7 @@ export function Groups() {
             message='Nenhuma denúncia disponível' />
         )}
       />
+      <Button  title="Iniciar Coleta"/>
     </Container>
   );
 }
