@@ -8,7 +8,7 @@ import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 
 export function Groups() {
-  const [groups, setGroups] = useState<string[]>([]);
+  const [groups, setGroups] = useState<string[]>(['Pamonha frita', 'rabanete']);
 
   return (
     <Container>
@@ -28,7 +28,7 @@ export function Groups() {
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
         ListEmptyComponent={(
           <ListEmpty
-            message='Nenhuma denúncia disponível' />
+            message="Nenhuma denúncia disponível"/>
         )}
       />
       <Button  title="Iniciar Coleta"/>

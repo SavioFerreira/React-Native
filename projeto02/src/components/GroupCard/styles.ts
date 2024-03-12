@@ -10,7 +10,7 @@ export const Container = styled(TouchableOpacity)`
   border-radius: 6px;
   flex-direction: row;
   align-items: center;
-  padding: 34px;
+  padding: 24px;
   margin-bottom: 12px;
 `;
 

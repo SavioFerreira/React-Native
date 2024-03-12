@@ -3,8 +3,8 @@ import styled from "styled-components/native";
 export const Container = styled.View`
   flex: 1;
   background-color: ${({theme}) => theme.COLORS.GRAY_600};
-  align-items: center;
-  justify-content: initial;
+  justify-content: center;
+  padding: 24px;
 `;
 
 export const Title = styled.Text`
