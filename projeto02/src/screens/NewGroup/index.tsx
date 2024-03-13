@@ -4,6 +4,7 @@ import { Header } from '@components/Header';
 import { UsersThree } from 'phosphor-react-native';
 import { Highlight } from '@components/Highlight';
 import { Button } from '@components/Button';
+import { Input } from '@components/Input';
 
 
 export function NewGroup() {
@@ -15,7 +16,10 @@ export function NewGroup() {
               <Highlight 
                 title='Nova Denúnia'
                 subtitle='Criar uma nova denúncia'/>
-                <Button title='Criar'/>
+                <Input />
+                <Button 
+                  title='Criar'
+                  style={{ marginTop: 20 }} />
             </Content>
         </Container>
     );
