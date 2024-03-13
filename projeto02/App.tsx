@@ -5,6 +5,7 @@ import { Loading } from '@components/Loading';
 import theme from './src/theme';
 import { Groups } from '@screens/Groups';
 import { NewGroup } from '@screens/NewGroup';
+import { Players } from '@screens/Players';
 
 export default function App() {
 
@@ -15,7 +16,7 @@ export default function App() {
         barStyle="light-content"
         backgroundColor="transparent"
         translucent/>
-      {fontsLoaded ? <NewGroup /> : <Loading/>}
+      {fontsLoaded ? <Players /> : <Loading/>}
     </ThemeProvider>
   )
 }
