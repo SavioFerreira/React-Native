@@ -16,7 +16,7 @@ export function NewGroup() {
               <Highlight 
                 title='Nova Denúnia'
                 subtitle='Criar uma nova denúncia'/>
-                <Input />
+                <Input placeholder='Local Denúncia'/>
                 <Button 
                   title='Criar'
                   style={{ marginTop: 20 }} />
