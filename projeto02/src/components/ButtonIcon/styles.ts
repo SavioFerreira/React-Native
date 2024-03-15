@@ -8,7 +8,7 @@ type Props = {
     type: ButtonIconTypeStyleProps;
 }
 
-export const Container = styled(TouchableOpacity)`
+export const Container = styled(TouchableOpacity)` 
   width: 56px;
   height: 56px;
 
