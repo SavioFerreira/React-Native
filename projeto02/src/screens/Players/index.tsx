@@ -12,7 +12,7 @@ import { Button } from '@components/Button';
 
 export function Players() {
   const [team, setTeam] = useState('Coleta 0');
-  const [players, setPlayers] = useState(['primeiro', 'segundo']);
+  const [players, setPlayers] = useState(['primeiro', 'segundo', 'terceiro', 'quarto', 'quinto']);
   
   return (
     <Container>
@@ -32,7 +32,7 @@ export function Players() {
       </Form>
       <HeaderList>
         <FlatList
-          data={['coleta 01', 'coleta 02', 'coleta 03', 'coleta 04', 'coleta 05', 'coleta 06']}
+          data={['coleta 01', 'coleta 02', 'coleta 03']}
           keyExtractor={item => item}
           renderItem={({ item }) => (
             <Filter 

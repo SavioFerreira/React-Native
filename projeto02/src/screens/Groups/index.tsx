@@ -30,6 +30,7 @@ export function Groups() {
           <ListEmpty
             message="Nenhuma denúncia disponível"/>
         )}
+        showsVerticalScrollIndicator={false}
       />
       <Button  title="Iniciar Coleta"/>
     </Container>
