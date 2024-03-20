@@ -32,7 +32,7 @@ export function Players() {
       </Form>
       <HeaderList>
         <FlatList
-          data={['coleta 01', 'coleta 02']}
+          data={['coleta 01', 'coleta 02', 'coleta 03', 'coleta 04', 'coleta 05', 'coleta 06']}
           keyExtractor={item => item}
           renderItem={({ item }) => (
             <Filter 
