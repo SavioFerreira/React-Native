@@ -32,7 +32,10 @@ export function Groups() {
         )}
         showsVerticalScrollIndicator={false}
       />
-      <Button  title="Iniciar Coleta"/>
+      <Button  
+        title="Iniciar Coleta"
+        onPress={() => console.log('clicou no botão de iniciar coletas')}  
+      />
     </Container>
   );
 }
