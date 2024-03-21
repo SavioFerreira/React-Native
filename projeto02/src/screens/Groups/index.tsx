@@ -1,14 +1,22 @@
-import { Container } from './styles';
 import { useState } from 'react';
+import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
 import { GroupCard } from '@components/GroupCard';
-import { FlatList } from 'react-native';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 
+import { Container } from './styles';
+
 export function Groups() {
-  const [groups, setGroups] = useState<string[]>(['Pamonha frita', 'rabanete']);
+  const [groups, setGroups] = useState<string[]>([]);
+  const navigation = useNavigation(); 
+
+  function handleNewGroup(){
+    
+  };
 
   return (
     <Container>
@@ -24,6 +32,7 @@ export function Groups() {
           <GroupCard
             title={item}
           />
+          
         )}
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
         ListEmptyComponent={(
@@ -31,9 +40,10 @@ export function Groups() {
             message="Nenhuma denúncia disponível"/>
         )}
         showsVerticalScrollIndicator={false}
+        
       />
       <Button  
-        title="Iniciar Coleta"
+        title="Iniciar Denúncia"
         onPress={() => console.log('clicou no botão de iniciar coletas')}  
       />
     </Container>
