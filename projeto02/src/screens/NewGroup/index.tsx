@@ -1,13 +1,24 @@
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 import styled from 'styled-components/native';
+
 import { Container, Content } from './styles'
+
 import { Header } from '@components/Header';
 import { UsersThree } from 'phosphor-react-native';
 import { Highlight } from '@components/Highlight';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 
-
 export function NewGroup() {
+  const [group, setGroup] = useState('');
+  const navigation = useNavigation();
+
+  function handleNew() {
+    return (
+      navigation.navigate('players', { group: 'cocotas'})   
+    );
+  }
     return (
         <Container> 
             <Header showBackButton/>
@@ -16,9 +27,13 @@ export function NewGroup() {
               <Highlight 
                 title='Nova Denúnia'
                 subtitle='Criar uma nova denúncia'/>
-                <Input placeholder='Local Denúncia'/>
+                <Input 
+                  placeholder='Local Denúncia'
+                  onChangeText={setGroup}
+                />
                 <Button 
                   title='Criar'
+                  onPress={handleNew}
                   style={{ marginTop: 20 }} />
             </Content>
         </Container>

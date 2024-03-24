@@ -15,7 +15,7 @@ export function Groups() {
   const navigation = useNavigation(); 
 
   function handleNewGroup(){
-    
+    navigation.navigate('new');
   };
 
   return (
@@ -44,7 +44,7 @@ export function Groups() {
       />
       <Button  
         title="Iniciar Denúncia"
-        onPress={() => console.log('clicou no botão de iniciar coletas')}  
+        onPress={handleNewGroup}  
       />
     </Container>
   );
