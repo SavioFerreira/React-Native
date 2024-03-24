@@ -9,11 +9,19 @@ import { useState } from 'react';
 import { PlayersCard } from '@components/PlayersCard';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
+import { useRoute } from '@react-navigation/native';
+
+
+type RouteParams = {
+  group: string;
+}
 
 export function Players() {
-  const [team, setTeam] = useState('Coleta 0');
-  const [players, setPlayers] = useState(['primeiro', 'segundo', 'terceiro', 'quarto', 'quinto']);
-  
+  const [team, setTeam] = useState('');
+  const [players, setPlayers] = useState(['']);
+
+  const route = useRoute();
+  const { group } = route.params as RouteParams;
   return (
     <Container>
       <Header showBackButton />
