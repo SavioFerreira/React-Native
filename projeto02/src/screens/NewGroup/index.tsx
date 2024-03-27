@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components/native';
 
 import { Container, Content } from './styles'
+import { groupCreate } from '@storage/group/groupCreate';
 
 import { Header } from '@components/Header';
 import { UsersThree } from 'phosphor-react-native';
@@ -14,8 +15,13 @@ export function NewGroup() {
   const [group, setGroup] = useState('');
   const navigation = useNavigation();
 
-  function handleNew() {
-    navigation.navigate('players', { group })   
+  async function handleNew() {
+    try{
+      await groupCreate(group);
+      navigation.navigate('players', { group })   
+    } catch(error) {
+      error;
+    }
   }
     return (
         <Container> 
