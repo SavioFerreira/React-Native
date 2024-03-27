@@ -10,7 +10,7 @@ export async function groupCreate(newGroup: string) {
       const groupAlredyExists = storageGroups.includes(newGroup);
 
       if (groupAlredyExists){
-        throw new AppError("Já existe uma denúnica para esse local.")
+        throw new AppError("Já existe uma denúnica para esse endereço.")
       }
       const storage = JSON.stringify([...storageGroups, newGroup]);
       await AsyncStorage.setItem(GROUP_COLLECTION, storage);
