@@ -22,7 +22,7 @@ type RouteParams = {
 export function Players() {
   const [newPlayerName, setNewPlayerName] = useState<string>('');
   const [team, setTeam] = useState('');
-  const [players, setPlayers] = useState(['']);
+  const [players, setPlayers] = useState(['denun 1', 'denun 2']);
 
 
   const route = useRoute();
@@ -85,7 +85,7 @@ export function Players() {
          <NumberOfPlayers>{players.length}</NumberOfPlayers>
       </HeaderList>
       <FlatList 
-        data={players}
+        data={''}
         keyExtractor={item => item}
         renderItem={({ item }) => (
           <PlayersCard 
