@@ -20,7 +20,7 @@ type RouteParams = {
 }
 
 export function Players() {
-  const [newPlayerName, setNewPlayerName] = useState('');
+  const [newPlayerName, setNewPlayerName] = useState<string>('');
   const [team, setTeam] = useState('');
   const [players, setPlayers] = useState(['']);
 
@@ -29,6 +29,7 @@ export function Players() {
   const { group } = route.params as RouteParams;
 
   async function handleAddPlayer() {
+
     if (newPlayerName.trim().length === 0){
       return Alert.alert('Novo membro', 'Informe o nome do usuário.')
     }
@@ -48,17 +49,18 @@ export function Players() {
         Alert.alert('Novo membro', 'Nao foi possível adicionar');
       }
     }
+    setNewPlayerName('');
   }
   return (
     <Container>
       <Header showBackButton />
       <Highlight
-        title='Denúncias Groups'
-        subtitle='nome dos componentes da coleta coletiva'
+        title={group}
+        subtitle='nome dos componentes da coleta'
       />
       <Form>
         <Input
-        onChangeText={setNewPlayerName}
+          onChangeText={setNewPlayerName}
           placeholder='Nome do membro'
           autoCorrect={false}
         />
@@ -69,7 +71,7 @@ export function Players() {
       </Form>
       <HeaderList>
         <FlatList
-          data={['coleta 01', 'coleta 02', 'coleta 03']}
+          data={players}
           keyExtractor={item => item}
           renderItem={({ item }) => (
             <Filter 
