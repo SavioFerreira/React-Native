@@ -1,19 +1,23 @@
-import { Header } from '@components/Header';
+import { useEffect, useState } from 'react';
+import { Alert, FlatList } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+
+import { playerAddByGroup } from '@storage/player/playerAddByGroup';
+import { playersGetByGroupAndTeam } from '@storage/player/playersGetByGroupAndTeam';
+import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO';
+
 import { Container, Form, HeaderList, NumberOfPlayers } from './styles';
+
+import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
 import { ButtonIcon } from '@components/ButtonIcon';
 import { Input } from '@components/Input';
 import { Filter } from '@components/Filter';
-import { Alert, FlatList } from 'react-native';
-import { useState } from 'react';
 import { PlayersCard } from '@components/PlayersCard';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
-import { useRoute } from '@react-navigation/native';
-import { AppError } from '@utils/AppError';
-import { playerAddByGroup } from '@storage/player/playerAddByGroup';
-import { playerGetByGroup } from '@storage/player/playersGetByGroup';
 
+import { AppError } from '@utils/AppError';
 
 type RouteParams = {
   group: string;
@@ -21,8 +25,8 @@ type RouteParams = {
 
 export function Players() {
   const [newPlayerName, setNewPlayerName] = useState<string>('');
-  const [team, setTeam] = useState('');
-  const [players, setPlayers] = useState(['denun 1', 'denun 2']);
+  const [team, setTeam] = useState('denis 1');
+  const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
 
 
   const route = useRoute();
@@ -39,8 +43,7 @@ export function Players() {
     }
     try {
       await playerAddByGroup(NewPlayer, group);
-      const players =  await playerGetByGroup(group);
-      console.log(players);
+      
     } catch(error) {
       if(error instanceof AppError) {
         Alert.alert('Novo membro', error.message)
@@ -51,6 +54,20 @@ export function Players() {
     }
     setNewPlayerName('');
   }
+
+  async function fetchPlayersByTeam(){
+    try {
+      const playersByTeam = await playersGetByGroupAndTeam(group, team);
+      setPlayers(playersByTeam);
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+
+  }, []);
+
   return (
     <Container>
       <Header showBackButton />
@@ -71,7 +88,7 @@ export function Players() {
       </Form>
       <HeaderList>
         <FlatList
-          data={players}
+          data={team}
           keyExtractor={item => item}
           renderItem={({ item }) => (
             <Filter 
@@ -85,11 +102,11 @@ export function Players() {
          <NumberOfPlayers>{players.length}</NumberOfPlayers>
       </HeaderList>
       <FlatList 
-        data={''}
-        keyExtractor={item => item}
+        data={players}
+        keyExtractor={item => item.name}
         renderItem={({ item }) => (
           <PlayersCard 
-            name={item}
+            name={item.name}
             onRemove={() => {}} 
           />
         )}
