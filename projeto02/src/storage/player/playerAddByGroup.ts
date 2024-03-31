@@ -15,7 +15,7 @@ export async function playerAddByGroup(newPlayer: PlayerStorageDTO, group: strin
       throw new AppError('Essa pessoa já está em uma coleta.');
     }
     const storage = JSON.stringify([...storedPlayers, newPlayer]);
-    await AsyncStorage.setItem(`${PLAYER_COLLECTION}-${group}`, storage );
+    await AsyncStorage.setItem(`${PLAYER_COLLECTION}-${group}`, storage);
   } catch(error) {
     throw error;
   }
