@@ -18,6 +18,7 @@ import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 
 import { AppError } from '@utils/AppError';
+import { playerRemoveByGroup } from '@storage/player/playerRemoveByGroup';
 
 type RouteParams = {
   group: string;
@@ -55,6 +56,16 @@ export function Players() {
         console.log(error);
         Alert.alert('Novo membro', 'Nao foi possível adicionar');
       }
+    }
+  }
+
+  async function handlePlayerRemove(playerName: string) {
+    try{
+      await playerRemoveByGroup(playerName, group);
+      fetchPlayersByTeam();
+    } catch(error){
+      throw error;
+      Alert.alert('Remover membro', 'Não foi possível remover o membro');
     }
   }
 
@@ -117,7 +128,7 @@ export function Players() {
         renderItem={({ item }) => (
           <PlayersCard 
             name={item.name}
-            onRemove={() => {}} 
+            onRemove={() => {handlePlayerRemove(item.name)}} 
           />
         )}
         ListEmptyComponent={() => (
