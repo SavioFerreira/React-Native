@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Alert, FlatList } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Alert, FlatList, TextInput } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import { playerAddByGroup } from '@storage/player/playerAddByGroup';
@@ -24,25 +24,29 @@ type RouteParams = {
 }
 
 export function Players() {
-  const [newPlayerName, setNewPlayerName] = useState<string>('');
-  const [team, setTeam] = useState('denis 1');
+  const [newPlayerName, setNewPlayerName] = useState('');
+  const [team, setTeam] = useState('denun 1');
   const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
 
 
   const route = useRoute();
   const { group } = route.params as RouteParams;
+  const newPlayerNameInputRef = useRef<TextInput>(null);
 
   async function handleAddPlayer() {
-
     if (newPlayerName.trim().length === 0){
       return Alert.alert('Novo membro', 'Informe o nome do usuário.')
-    }
+    } Alert.alert('Usuário adicionado', `Usuário ${newPlayerName} foi adicionado com sucesso!`)
+    
     const NewPlayer = {
       name: newPlayerName,
       team,
     }
     try {
       await playerAddByGroup(NewPlayer, group);
+      newPlayerNameInputRef.current?.blur();
+      setNewPlayerName('');
+      fetchPlayersByTeam();
       
     } catch(error) {
       if(error instanceof AppError) {
@@ -52,7 +56,6 @@ export function Players() {
         Alert.alert('Novo membro', 'Nao foi possível adicionar');
       }
     }
-    setNewPlayerName('');
   }
 
   async function fetchPlayersByTeam(){
@@ -61,12 +64,13 @@ export function Players() {
       setPlayers(playersByTeam);
     } catch(error) {
       console.log(error);
+      Alert.alert("Não foi possível carregar os membros")
     }
   }
 
   useEffect(() => {
-
-  }, []);
+    fetchPlayersByTeam();
+  }, [team]);
 
   return (
     <Container>
@@ -77,18 +81,24 @@ export function Players() {
       />
       <Form>
         <Input
+          inputRef={newPlayerNameInputRef}
           onChangeText={setNewPlayerName}
+          value={newPlayerName}
           placeholder='Nome do membro'
           autoCorrect={false}
+          onSubmitEditing={handleAddPlayer}
+          returnKeyType='done'
         />
         <ButtonIcon
           icon='add'
-          onPress={handleAddPlayer}
+          onPress={() => {
+            handleAddPlayer()
+          }}
         />
       </Form>
       <HeaderList>
         <FlatList
-          data={team}
+          data={['denun 1', 'denun 2']}
           keyExtractor={item => item}
           renderItem={({ item }) => (
             <Filter 
