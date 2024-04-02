@@ -20,12 +20,14 @@ import { Button } from '@components/Button';
 import { AppError } from '@utils/AppError';
 import { playerRemoveByGroup } from '@storage/player/playerRemoveByGroup';
 import { groupRemoveByName } from '@storage/group/groupRemoveByName';
+import { Loading } from '@components/Loading';
 
 type RouteParams = {
   group: string;
 }
 
 export function Players() {
+  const [isLoading, setIsLoading] = useState(true);
   const [newPlayerName, setNewPlayerName] = useState('');
   const [team, setTeam] = useState('denun 1');
   const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
@@ -92,8 +94,10 @@ export function Players() {
 
   async function fetchPlayersByTeam(){
     try {
+      setIsLoading(true);
       const playersByTeam = await playersGetByGroupAndTeam(group, team);
       setPlayers(playersByTeam);
+      setIsLoading(false);
     } catch(error) {
       console.log(error);
       Alert.alert("Não foi possível carregar os membros")
@@ -143,23 +147,26 @@ export function Players() {
          /> 
          <NumberOfPlayers>{players.length}</NumberOfPlayers>
       </HeaderList>
-      <FlatList 
-        data={players}
-        keyExtractor={item => item.name}
-        renderItem={({ item }) => (
-          <PlayersCard 
-            name={item.name}
-            onRemove={() => {handlePlayerRemove(item.name)}} 
+      {
+        isLoading ? <Loading /> :
+          <FlatList
+            data={players}
+            keyExtractor={item => item.name}
+            renderItem={({ item }) => (
+              <PlayersCard
+                name={item.name}
+                onRemove={() => { handlePlayerRemove(item.name) }}
+              />
+            )}
+            ListEmptyComponent={() => (
+              <ListEmpty
+                message='Não há pessoas na coleta'
+              />
+            )}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={[{ paddingBottom: 100 }, players.length === 0 && { flex: 1 }]}
           />
-        )}
-        ListEmptyComponent={() => (
-          <ListEmpty
-            message='Não há pessoas na coleta'
-          />
-        )}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={[{ paddingBottom : 100 }, players.length === 0 && { flex: 1 }]}
-      />
+      }
       <Button 
         title='Remover denunica'
         type='SECONDARY'

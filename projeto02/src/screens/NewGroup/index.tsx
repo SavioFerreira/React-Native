@@ -1,18 +1,18 @@
-import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 
 import { Container, Content } from './styles'
-import { groupCreate } from '@storage/group/groupCreate';
-import { AppError } from '@utils/AppError';
 
 import { Header } from '@components/Header';
 import { UsersThree } from 'phosphor-react-native';
 import { Highlight } from '@components/Highlight';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
-import { Alert } from 'react-native';
 
+import { groupCreate } from '@storage/group/groupCreate';
+import { AppError } from '@utils/AppError';
 
 export function NewGroup() {
   const [group, setGroup] = useState('');
@@ -32,8 +32,9 @@ export function NewGroup() {
 
       } else {
         Alert.alert('Nova Denúncia', 'Não foi possível criar a denúncia')
+        error;
       }
-      error;
+      
     }
   }
     return (
