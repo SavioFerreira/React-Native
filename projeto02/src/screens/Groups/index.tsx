@@ -26,13 +26,14 @@ export function Groups() {
       setIsLoading(true);
       const data = await groupsGetAll();
       setGroups(data);
-      setIsLoading(false);
     } catch(error) {
       Alert.alert('Denuncias', 'Não foi possível carregar as denúncias')
-      error;
+    }
+    finally {
+      setIsLoading(false);
     }
   }
-
+  
   function handleOpenGroup(group: string) {
     navigation.navigate('players', { group });
   }
