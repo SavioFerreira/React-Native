@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Center, ScrollView, VStack, Skeleton, Text, Heading } from 'native-base';
+import { Alert, TouchableOpacity } from 'react-native';
+import { Center, ScrollView, VStack, Skeleton, Text, Heading, useToast } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
 
 import { ScreenHeader } from '@components/ScreenHeader';
 import { UserPhoto } from '@components/UserPhoto';
@@ -13,6 +14,7 @@ const PHOTO_SIZE = 33;
 export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [userPhoto, setUserPhoto] = useState('https://github.com/savioferreira.png');
+  const toast = useToast();
 
   async function handleUserPhotoSelect() {
     setPhotoIsLoading(true);
@@ -25,7 +27,18 @@ export function Profile() {
       });
 
       if (photoSelected.canceled) return;
-      if (photoSelected.assets[0].uri) setUserPhoto(photoSelected.assets[0].uri);
+      if (photoSelected.assets[0].uri){
+        const photoInfo = await FileSystem.getInfoAsync(photoSelected.assets[0].uri);
+        if (photoInfo.exists && (photoInfo.size / 2084) > 5){
+            return toast.show({
+              title: 'Essa imagem é muito grande. Escolha uma até 5MB.',
+              placement: 'top',
+              bgColor: 'red.500'
+            });
+            return Alert.alert("Essa imagem é muito grande", "Eita foto grande da mizera man kkk só pode até 5MB.")
+        }
+        setUserPhoto(photoSelected.assets[0].uri);
+      }
 
     } catch(error) {
         throw error;
