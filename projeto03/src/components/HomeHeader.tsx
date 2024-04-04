@@ -1,11 +1,11 @@
-import { HStack, Heading, Text, VStack, Icon } from "native-base";
-import { TextProps, TouchableOpacity } from "react-native";
+import { HStack, Heading, Text, VStack, Icon, IHeadingProps } from "native-base";
+import { TouchableOpacity } from "react-native";
 
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { UserPhoto } from "./UserPhoto";
 
-type Props = TextProps & {
+type Props = IHeadingProps & {
     userName: string;
 }
 
