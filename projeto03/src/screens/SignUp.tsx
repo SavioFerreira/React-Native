@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { VStack, Image, Text, Center, Heading, ScrollView } from "native-base";
+import { VStack, Image, Text, Center, Heading, ScrollView, useToast } from "native-base";
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -18,7 +18,7 @@ type FormDataProps = {
 }
 
 const signUpSchema = yup.object({
-  name: yup.string().required('Informe o nome.'),
+  name: yup.string().required('Informe o nome.').min(4,'O usuário não pode ter menos de 4 caracteres' ),
   email: yup.string().required('Informe o e-mail.').email('E-mail inválido.'),
   password: yup.string().required('Informe a senha.').min(6, 'A senha deve ter pelo menos 6 dígitos.'),
   password_confirm: yup.string().required('Confirme a senha.').oneOf([yup.ref('password')], 'A senha deve ser a mesma')
@@ -26,17 +26,27 @@ const signUpSchema = yup.object({
 
 export function SignUp() {
   
-  const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
+  const { control, handleSubmit, reset, formState: { errors } } = useForm<FormDataProps>({
     resolver: yupResolver(signUpSchema)
   });
-
   const navigation = useNavigation();
+  const toast = useToast();
+
   function handleGoBack() {
     navigation.goBack();
   }
+
   function handleSignUp(data: FormDataProps) {
-    console.log(data);
+    
+     toast.show({
+      title: `Obrigado, ${data.name}. Conta criada com sucesso.`,
+      placement: 'top',
+      bgColor: 'red.500',
+      
+    });
+    reset();
   }
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
         <VStack flex={1} px={10} pb={16}>
@@ -122,7 +132,7 @@ export function SignUp() {
         <Button 
           title="Voltar para o login" 
           variant="outline" 
-          mt={24}
+          mt={12}
           onPress={handleGoBack}
         />
       </VStack>

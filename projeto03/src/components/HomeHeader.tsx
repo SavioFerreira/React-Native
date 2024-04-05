@@ -22,7 +22,7 @@ export function HomeHeader({userName}: Props){
           Olá,
         </Text>
 
-        <Heading color="gray.100" fontSize="md">
+        <Heading color="gray.100" fontSize="md" fontFamily="heading">
           {userName}
         </Heading>
       </VStack>
