@@ -41,7 +41,7 @@ export function SignUp() {
      toast.show({
       title: `Obrigado, ${data.name}. Conta criada com sucesso.`,
       placement: 'top',
-      bgColor: 'red.500',
+      bgColor: 'green.600',
       
     });
     reset();
