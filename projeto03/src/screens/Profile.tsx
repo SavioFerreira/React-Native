@@ -83,7 +83,7 @@ export function Profile() {
             bg="gray.500"
             placeholder="E-mail"
             isDisabled
-            _disabled={{backgroundColor: 'gray.900'}}
+            readOnly
           />
         </Center>
         <VStack px={10} mt={12} mb={9}>
