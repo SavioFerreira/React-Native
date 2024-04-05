@@ -33,9 +33,8 @@ export function Profile() {
             return toast.show({
               title: 'Essa imagem é muito grande. Escolha uma até 5MB.',
               placement: 'top',
-              bgColor: 'red.500'
+              bgColor: 'red.500',
             });
-            return Alert.alert("Essa imagem é muito grande", "Eita foto grande da mizera man kkk só pode até 5MB.")
         }
         setUserPhoto(photoSelected.assets[0].uri);
       }
