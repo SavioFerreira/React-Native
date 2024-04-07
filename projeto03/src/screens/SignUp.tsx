@@ -36,10 +36,11 @@ export function SignUp() {
     navigation.goBack();
   }
 
-  function handleSignUp(data: FormDataProps) {
-    
+  function handleSignUp({name, email, password}: FormDataProps) {
+     
+     
      toast.show({
-      title: `Obrigado, ${data.name}. Conta criada com sucesso.`,
+      title: `Obrigado, ${name}. Conta criada com sucesso.`,
       placement: 'top',
       bgColor: 'green.600',
       
