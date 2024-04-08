@@ -12,6 +12,7 @@ import BackgroundImg from '@assets/background.png';
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
 import { AppError } from "@utils/AppError";
+import { useState } from "react";
 
 type FormDataProps = {
   name: string;
@@ -28,10 +29,12 @@ const signUpSchema = yup.object({
 });
 
 export function SignUp() {
-  
+  const [isLoading, setIsloading] = useState(false);
+
   const { control, handleSubmit, reset, formState: { errors } } = useForm<FormDataProps>({
     resolver: yupResolver(signUpSchema)
   });
+
   const navigation = useNavigation();
   const toast = useToast();
 
@@ -41,18 +44,20 @@ export function SignUp() {
 
   async function handleSignUp({name, email, password}: FormDataProps) {
     try {
+      setIsloading(true);
       const response = await api.post('/users', {name, email, password} );
        toast.show({
         title: `Obrigado, ${name}. Conta criada com sucesso.`,
         placement: 'top',
         bgColor: 'green.600',
       });
-      reset();
-      
+      handleGoBack();
+       
     } catch(error) {
       const isAppError = error instanceof AppError;
       const title = isAppError ? error.message : 'Não foi possível criar a conta. Tente novamente mais tarde.'
      
+      setIsloading(false);
       toast.show({
         title: title,
         placement: 'top',
@@ -140,6 +145,7 @@ export function SignUp() {
           <Button 
             title="Criar e acessar" 
             onPress={handleSubmit(handleSignUp)}
+            isLoading={isLoading}
           />
         </Center>
         

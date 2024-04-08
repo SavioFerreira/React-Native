@@ -49,7 +49,6 @@ export function SignIn() {
       const title = isAppError ? error.message : 'Não foi possível acessar sua conta. Tente novamente mais tarde.'
       
       setIsloading(false);
-
       toast.show({
         title: title,
         placement: 'top',
