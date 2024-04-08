@@ -1,12 +1,11 @@
-import { Avatar  } from "native-base";
-import { InterfaceAvatarProps } from "native-base/lib/typescript/components/composites/Avatar/types";
+import { IImageProps, Image  } from "native-base";
 
-type Props = InterfaceAvatarProps & {
+type Props = IImageProps & {
   size: number;
 }
 export function UserPhoto({size, ...rest}: Props) {
   return (
-    <Avatar  
+    <Image  
       w={size}
       h={size}
       rounded="full"

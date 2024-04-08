@@ -8,12 +8,14 @@ import { ScreenHeader } from '@components/ScreenHeader';
 import { UserPhoto } from '@components/UserPhoto';
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
+import { useAuth } from '@hooks/useAuth';
 
 const PHOTO_SIZE = 33;
 
 export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
-  const [userPhoto, setUserPhoto] = useState('https://github.com/savioferreira.png');
+  const {user} = useAuth();
+  const [userPhoto, setUserPhoto] = useState(user.avatar);
   const toast = useToast();
 
   async function handleUserPhotoSelect() {
@@ -63,6 +65,7 @@ export function Profile() {
             :       
             <UserPhoto 
               source={{uri: userPhoto}}
+              alt="Imagem do usuário"
               size={PHOTO_SIZE}
               borderColor={'green.700'}
             />
