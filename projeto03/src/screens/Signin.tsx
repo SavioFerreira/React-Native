@@ -15,6 +15,7 @@ import * as yup from 'yup';
 
 import { useAuth } from '@hooks/useAuth';
 import { AppError } from '@utils/AppError';
+import { useState } from 'react';
 
 type FormData = {
   email: string;
@@ -27,24 +28,28 @@ const signInSchema = yup.object({
 });
 
 export function SignIn() {
+  const [isLoading, setIsloading] = useState(false);
+
   const { singIn } = useAuth();
 
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
   const toast = useToast();
 
-  const { control, handleSubmit, reset, formState: { errors } }  = useForm<FormData>({
+  const { control, handleSubmit, formState: { errors } }  = useForm<FormData>({
     resolver: yupResolver(signInSchema)
   });
 
   async function handleSignIn({email, password}: FormData) {
     try {
+      setIsloading(true);
       await singIn(email, password);
-      reset();
       
     } catch(error) {
       const isAppError = error instanceof AppError;
       const title = isAppError ? error.message : 'Não foi possível acessar sua conta. Tente novamente mais tarde.'
-     
+      
+      setIsloading(false);
+
       toast.show({
         title: title,
         placement: 'top',
@@ -113,6 +118,7 @@ export function SignIn() {
           </Controller>
           <Button title="Acessar"
             onPress={handleSubmit(handleSignIn)}
+            isLoading={isLoading}
           />
         </Center>
 
