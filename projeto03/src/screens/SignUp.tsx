@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { useAuth } from '@hooks/useAuth';
 import { api } from '@services/api';
 
 import LogoSvg from '@assets/logo.svg';
@@ -37,6 +38,7 @@ export function SignUp() {
 
   const navigation = useNavigation();
   const toast = useToast();
+  const { singIn } = useAuth();
 
   function handleGoBack() {
     navigation.goBack();
@@ -45,19 +47,21 @@ export function SignUp() {
   async function handleSignUp({name, email, password}: FormDataProps) {
     try {
       setIsloading(true);
-      const response = await api.post('/users', {name, email, password} );
+       await api.post('/users', {name, email, password} );
+
        toast.show({
         title: `Obrigado, ${name}. Conta criada com sucesso.`,
         placement: 'top',
         bgColor: 'green.600',
       });
-      handleGoBack();
+      
+      await singIn(email, password);
        
     } catch(error) {
-      const isAppError = error instanceof AppError;
-      const title = isAppError ? error.message : 'Não foi possível criar a conta. Tente novamente mais tarde.'
-     
       setIsloading(false);
+      const isAppError = error instanceof AppError;
+      const title = isAppError ? error.message : 'Não foi possível criar a conta. Tente novamente mais tarde.';
+      
       toast.show({
         title: title,
         placement: 'top',
