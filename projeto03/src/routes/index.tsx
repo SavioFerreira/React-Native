@@ -5,7 +5,6 @@ import { AuthRoutes } from './auth.routes';
 
 import { useAuth } from '@hooks/useAuth';
 import { AppRoutes } from './app.routes';
-import { useState } from 'react';
 import { Loading } from '@components/Loading';
 
 export function Routes() {
