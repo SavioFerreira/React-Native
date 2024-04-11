@@ -2,16 +2,22 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { FlatList, Heading, HStack, Text, useToast, VStack } from 'native-base';
 
-import { api } from '@services/api';
 import { AppError } from '@utils/AppError';
+
+import { api } from '@services/api';
+import { ExerciseDTO } from '@dtos/ExerciseDTO';
+
 import { Group } from '@components/Group';
 import { HomeHeader } from '@components/HomeHeader';
 import { ExerciseCard } from '@components/ExerciseCard';
+
 import { AppNavigatorRoutesProps } from '@routes/app.routes';
+
+
 export function Home() {
 
   const [groups, setGroups] = useState<string[]>([]);
-  const [exercises, setExercises] = useState([]);
+  const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
   const [groupSelected, setGroupSelected] = useState('Costas');
 
   const toast = useToast();
@@ -37,7 +43,7 @@ export function Home() {
   async function fetchExercisesByGroup() {
     try {
       const response = await api.get(`/exercises/bygroup/${groupSelected}`);
-      console.log(response.data);
+      setExercises(response.data);
 
     } catch (error) {
       const isAppError = error instanceof AppError;
@@ -93,9 +99,12 @@ export function Home() {
         </HStack>
         <FlatList 
           data={exercises}
-          keyExtractor={item => item}
+          keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <ExerciseCard onPress={handleOpenExerciseDetails} />
+            <ExerciseCard 
+              onPress={handleOpenExerciseDetails} 
+              data={item}
+            />
           )}
           showsVerticalScrollIndicator={false}
           _contentContainerStyle={{
