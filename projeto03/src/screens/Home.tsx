@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { FlatList, Heading, HStack, Text, useToast, VStack } from 'native-base';
+import { Box, FlatList, Heading, HStack, Text, useToast, VStack } from 'native-base';
 
 import { FlatListComponent } from 'react-native';
 
@@ -102,21 +102,18 @@ export function Home() {
               {exercises.length}
             </Text>
           </HStack>
-          <VStack maxH={420}>
-            <FlatList
-              data={exercises}
-              keyExtractor={item => item.id}
-              renderItem={({ item }) => (
-                <ExerciseCard
-                  onPress={handleOpenExerciseDetails}
-                  data={item}
-                />
-              )}
-              showsVerticalScrollIndicator={false}
-              pb={20}
-            />
-          </VStack>
-
+          <FlatList
+            data={exercises}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (
+              <ExerciseCard
+                onPress={handleOpenExerciseDetails}
+                data={item}
+              />
+            )}
+            showsVerticalScrollIndicator={false}
+            pb={20}
+          />
         </VStack>
       </VStack>
     </VStack>
