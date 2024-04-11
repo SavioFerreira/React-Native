@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { FlatList, Heading, HStack, Text, useToast, VStack } from 'native-base';
 
+import { FlatListComponent } from 'react-native';
+
 import { AppError } from '@utils/AppError';
 
 import { api } from '@services/api';
@@ -59,58 +61,63 @@ export function Home() {
 
   useEffect(() => {
     fetchGroups();
-  },[])
+  }, [])
 
   useFocusEffect(
     useCallback(() => {
       fetchExercisesByGroup()
-    },[groupSelected])
+    }, [groupSelected])
   )
 
   return (
     <VStack flex={1}>
       <HomeHeader />
-      <FlatList 
-        data={groups}
-        keyExtractor={item => item}
-        renderItem={({ item }) => (
-          <Group 
-            name={item}
-            isActive={groupSelected.toLocaleUpperCase() === item.toLocaleUpperCase()}
-            onPress={() => setGroupSelected(item)}
-          />
-        )}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        _contentContainerStyle={{
-          px: 8,
-        }}
-        my={10}
-        maxH={10}
-      />
-      <VStack px={8}>
-        <HStack justifyContent="space-between" mb={5}>
-          <Heading color="gray.200" fontSize="md" fontFamily="heading">
-            Exercícios
-          </Heading>
-          <Text color="gray.200" fontSize="sm">
-            {exercises.length}
-          </Text>
-        </HStack>
-        <FlatList 
-          data={exercises}
-          keyExtractor={item => item.id}
+      <VStack>
+        <FlatList
+          data={groups}
+          keyExtractor={item => item}
           renderItem={({ item }) => (
-            <ExerciseCard 
-              onPress={handleOpenExerciseDetails} 
-              data={item}
+            <Group
+              name={item}
+              isActive={groupSelected.toLocaleUpperCase() === item.toLocaleUpperCase()}
+              onPress={() => setGroupSelected(item)}
             />
           )}
-          showsVerticalScrollIndicator={false}
+          horizontal
+          showsHorizontalScrollIndicator={false}
           _contentContainerStyle={{
-            paddingBottom: 20
+            px: 8,
           }}
+          my={10}
+          maxH={10}
+          minH={10}
         />
+
+        <VStack px={8}>
+          <HStack justifyContent="space-between" mb={5}>
+            <Heading color="gray.200" fontSize="md" fontFamily="heading">
+              Exercícios
+            </Heading>
+            <Text color="gray.200" fontSize="sm">
+              {exercises.length}
+            </Text>
+          </HStack>
+          <VStack maxH={420}>
+            <FlatList
+              data={exercises}
+              keyExtractor={item => item.id}
+              renderItem={({ item }) => (
+                <ExerciseCard
+                  onPress={handleOpenExerciseDetails}
+                  data={item}
+                />
+              )}
+              showsVerticalScrollIndicator={false}
+              pb={20}
+            />
+          </VStack>
+
+        </VStack>
       </VStack>
     </VStack>
   );
