@@ -13,6 +13,8 @@ import { UserPhoto } from '@components/UserPhoto';
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { useAuth } from '@hooks/useAuth';
+import { api } from '@services/api';
+import { AppError } from '@utils/AppError';
 
 const PHOTO_SIZE = 33;
 
@@ -56,10 +58,12 @@ const ProfileSchema = yup.object({
 });
 
 export function Profile() {
+  const [isLoading, setIsLoading] = useState(false);
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
-  const { user } = useAuth();
+  const { user, updateUserProfile } = useAuth();
   const [userPhoto, setUserPhoto] = useState(user.avatar);
   const toast = useToast();
+
   const { control, handleSubmit, formState: {errors} } = useForm<FormDataProps>({
     defaultValues: {
       name: user.name,
@@ -98,8 +102,31 @@ export function Profile() {
     }
   }
 
-  async function handleProfileUpdate(data: FormDataProps) {
-    console.log(data)
+  async function handleProfileUpdate(data: FormDataProps) { 
+    try {
+      setIsLoading(true);
+      const userUpdated = user;
+      userUpdated.name = data.name;
+
+      await api.put('/users', data)
+      toast.show({
+        title: "perfil atualizado com sucesso!",
+        placement: 'top',
+        bgColor: 'green.500',
+      });
+      await updateUserProfile(userUpdated);
+
+    } catch(error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError ? error.message : 'Não foi possivel fazer a alteração do seu usuário.';
+      toast.show({
+        title: title,
+        placement: 'top',
+        bgColor: 'red.500',
+      });
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -207,6 +234,7 @@ export function Profile() {
           />
           <Button title="Atualizar" mt={4} 
             onPress={handleSubmit(handleProfileUpdate)}
+            isLoading={isLoading}
           />
         </VStack>
       </ScrollView>
