@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Heading, VStack, SectionList, Text, useToast } from 'native-base';
 
 import { ScreenHeader } from '@components/ScreenHeader';
