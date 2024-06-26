@@ -25,11 +25,34 @@ type FormDataProps = {
 };
 
 const ProfileSchema = yup.object({
-  name: yup.string().required('Informe o nome.'),
-  email: yup.string().required('Informe seu email.').email('Email inválido'),
-  old_password: yup.string().min(6, 'A senha não deve ser menor que 6 caracteries').nullable().transform((value) => !!value ? value : null),
-  password: yup.string().min(6, 'A senha não deve ser menor que 6 caracteries').nullable().transform((value) => !!value ? value : null),
-  confirm_password: yup.string().nullable().transform((value) => !!value ? value : null).oneOf([yup.ref('password'), null], 'Digite a nova senha corretamente'),
+  name: yup
+    .string()
+    .required('Informe o nome.'),
+  email: yup
+   .string()
+   .required('Informe seu email.')
+   .email('Email inválido'),
+  old_password: yup
+    .string()
+    .min(6, 'A senha não deve ser menor que 6 caracteries')
+    .nullable().transform((value) => !!value ? value : null),
+  password: yup
+    .string()
+    .min(6, 'A senha não deve ser menor que 6 caracteries')
+    .nullable()
+    .transform((value) => !!value ? value : null),
+  confirm_password: yup
+    .string()
+    .nullable()
+    .transform((value) => !!value ? value : null)
+    .oneOf([yup.ref('password'), null], 'Digite a nova senha corretamente')
+    .when('password', {
+       is: (Field: any) => Field, 
+         then: (schema ) =>  schema
+           .nullable()
+           .required('Informe a confirmação da senha')
+           .transform((value) => !!value ? value : null)
+    })
 });
 
 export function Profile() {
